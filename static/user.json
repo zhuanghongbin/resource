@@ -1,0 +1,95 @@
+[{
+		"href": "/",
+		"icon": "icon-home",
+		"name": "首页",
+		"slideMenu": [
+
+		]
+	},
+	{
+		"href": "/cust",
+		"icon": "fa fa-th-large",
+		"name": "客户管理",
+		"slideMenu": [{
+				"childNode": [{
+						"href": "/cust/person/add",
+						"name": "添加客户"
+					},
+					{
+						"href": "/cust/person/query",
+						"name": "已认证用户"
+					},
+					{
+						"href": "/cust/person/waitauth",
+						"name": "待认证用户"
+					}
+				],
+				"icon": "fa fa-th-large",
+				"name": "个人客户"
+			},
+			{
+				"childNode": [{
+						"href": "/cust/company/add",
+						"name": "添加客户"
+					},
+					{
+						"href": "/cust/company/query",
+						"name": "已认证客户"
+					},
+					{
+						"href": "/cust/company/waitauth",
+						"name": "待认证客户"
+					},
+					{
+						"href": "/cust/company/blacklist",
+						"name": "黑名单用户"
+					}
+				],
+				"icon": "fa fa-th-large",
+				"name": "企业用户"
+			},
+			{
+				"childNode": [{
+						"href": "/cust/importcustomer/waiting",
+						"name": "待审核"
+					},
+					{
+						"href": "/cust/importcustomer/query",
+						"name": "已审核"
+					}
+				],
+				"icon": "fa fa-th-large",
+				"name": "导流客户"
+			},
+			{
+				"childNode": [{
+					"href": "/cust/companylib/mlib",
+					"name": "公司库管理"
+				}],
+				"icon": "fa fa-th-large",
+				"name": "公司库管理"
+			},
+			{
+				"childNode": [{
+						"href": "/cust/whitelist/buyer",
+						"name": "白名单"
+					},
+					{
+						"href": "/cust/whitelist/typelist",
+						"name": "白名单类型"
+					}
+				],
+				"icon": "fa fa-th-large",
+				"name": "白名单管理"
+			},
+			{
+				"childNode": [{
+					"href": "/cust/blacklist/list",
+					"name": "黑名单"
+				}],
+				"icon": "fa fa-th-large",
+				"name": "黑名单管理"
+			}
+		]
+	}
+]
