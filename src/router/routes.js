@@ -8,7 +8,7 @@
 /* Layout */
 import Layout from '@/views/layout/Layout'
 
-const routes = [
+export const constantRouterMap = [
   {
     path: '/redirect',
     component: Layout,
@@ -44,7 +44,7 @@ const routes = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'dashboard', noCache: true }
+        meta: { title: 'dashboard', icon: 'iconfont icon-message_fill', noCache: true }
       }
     ]
   }
@@ -62,4 +62,37 @@ const routes = [
   // }
 ]
 
-export default routes
+export const asyncRouterMap = [
+  {
+    path: '/permission',
+    component: Layout,
+    redirect: '/permission/index',
+    alwaysShow: true, // will always show the root menu
+    meta: {
+      title: 'permission',
+      icon: 'iconfont icon-message_fill',
+      roles: ['admin', 'editor'] // you can set roles in root nav
+    },
+    children: [
+      {
+        path: 'page',
+        component: () => import('@/views/permission/page'),
+        name: 'PagePermission',
+        meta: {
+          title: 'pagePermission',
+          roles: ['admin'] // or you can only set roles in sub nav
+        }
+      },
+      {
+        path: 'directive',
+        component: () => import('@/views/permission/directive'),
+        name: 'DirectivePermission',
+        meta: {
+          title: 'directivePermission'
+          // if do not set roles, means: this page does not require permission
+        }
+      }
+    ]
+  },
+  { path: '*', redirect: '/404', hidden: true }
+]

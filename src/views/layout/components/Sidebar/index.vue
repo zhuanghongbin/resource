@@ -28,6 +28,8 @@ export default {
     isCollapse () {
       return !this.sidebar.opened
     }
+  },
+  mounted () {
   }
 }
 </script>

@@ -20,9 +20,19 @@ export function logout () {
 }
 
 export function getUserInfo (token) {
-  return request({
-    url: '/user/info',
-    method: 'get',
-    params: { token }
+  return new Promise((resolve, reject) => {
+    resolve({data: {
+      name: 'jim',
+      roles: ['admin'],
+      avatar: 'sss',
+      introduction: 'sssxx'
+    }})
+  }).then(res => {
+    return res
   })
+  // return request({
+  //   url: '/user/info',
+  //   method: 'get',
+  //   params: { token }
+  // })
 }

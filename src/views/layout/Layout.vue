@@ -293,7 +293,7 @@ export default {
           })
         })
       }
-      if (this.slideList.slideMenu.length) {
+      if (this.slideList.slideMenu && this.slideList.slideMenu.length) {
         this.isSubMenu = true
       } else {
         this.isSubMenu = false
@@ -307,7 +307,7 @@ export default {
         // 处理返回回来的数据为其子菜单添加索引
         data.data.forEach((item, index) => {
           item.index = index + ''
-          if (item.slideMenu.length) {
+          if (item.slideMenu && item.slideMenu.length) {
             item.slideMenu.forEach((item2, index2) => {
               item2.childNode.forEach((item3, index3) => {
                 item3.index = index2 + '-' + index3

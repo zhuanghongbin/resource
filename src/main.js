@@ -3,17 +3,20 @@
 import Vue from 'vue'
 import App from './App'
 
+// 全局路由守卫（权限）
+import './permission'
+
 // 引入全局过滤函数
 import * as filters from './filters'
 
 // 引入vue-router
-import Router from 'vue-router'
-import route from './router/index.js'
+import router from './router/index.js'
 
 // 引用vuex
-import Vuex from 'vuex'
-import creatStore from './store/index'
+import store from './store/index'
 
+// 全局样式
+import '@/assets/style/index.scss'
 // 引入全局css
 import './assets/style/reset.css'
 // 引入iconfont的css
@@ -35,12 +38,9 @@ Vue.use(ElementUI, {size: 'small', zIndex: 3000})
 // Vue.use(Button)
 // Vue.use(Select)
 
-// 挂载vue-router
-Vue.use(Router)
-const router = route()
-// 挂载vuex
-Vue.use(Vuex)
-const store = creatStore()
+// // 挂载vuex
+// Vue.use(Vuex)
+// const store = creatStore()
 
 // 注册全局过滤器
 Object.keys(filters).forEach(key => {
