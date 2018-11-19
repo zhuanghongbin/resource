@@ -1,20 +1,17 @@
 <template>
   <div class="app-container">
-    <!-- <switch-roles @change="handleRolesChange" /> -->
+    <breadcrumb class="breadcrumb-container"/>
     page
   </div>
 </template>
 
 <script>
-import SwitchRoles from './components/SwitchRoles'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default{
   name: 'PagePermission',
-  components: { SwitchRoles },
-  methods: {
-    handleRolesChange () {
-      this.$router.push({ path: '/permission/index?' + +new Date() })
-    }
+  components: {
+    Breadcrumb
   }
 }
 </script>

@@ -1,145 +1,182 @@
 <style lang="scss" scoped>
-.layout {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
-  header {
-    background: #3e4558;
-    .collapse-icon {
-      height: 60px;
-      min-width: 960px;
-    }
-  }
-  div.layout-aside {
+  .layout {
     display: flex;
-    flex: 1;
-    top: 60px;
-    overflow: hidden;
-    > aside {
-      width: 0;
-    }
-    > section {
-      flex: 1;
-      padding: 25px 25px 0 25px;
-    }
-    .aside-show {
-      width: 200px;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    header {
       background: #3e4558;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      left: 0;
+      z-index: 99;
     }
-  }
-}
-.logo {
-  height: 60px;
-  overflow: hidden;
-  border-color: rgba(238, 241, 146, 0.3);
-  border-right-width: 1px;
-  border-right-style: solid;
-  img {
-    display: inline-block;
-    // width: 201px;
-    height: 50px;
-    padding: 5px;
-    margin: 0 auto;
-  }
-  .logo-text {
-    font-size: 16px;
-    display: inline-block;
-    color: #fff;
-  }
-}
-.content-info {
-  text-align: right;
-  .user-info{
-    padding-right: 35px;
-    text-align: right;
-  }
-  .userinfo-inner {
-    cursor: pointer;
-    color: #fff;
-    line-height: 60px;
-    img {
-      width: 40px;
+    footer{
+      position: fixed;
+      bottom: 0;
+      width: 100%;
       height: 40px;
-      border-radius: 20px;
-      margin: 10px 0px 10px 10px;
-      float: right;
+      line-height: 40px;
+      text-align: center;
+      color: #fff;
+      background: #3e4558;
+      left: 180px;
+      transition: left .28s;
+      z-index: 99;
     }
   }
-}
-.app-el-menu {
-  width: 200px;
-}
-.tools {
-  padding: 0 18px;
-  font-size: 24px;
-  height: 60px;
-  line-height: 60px;
-  color: white;
-  cursor: pointer;
-}
-.logo-collapse-width {
-  width: 66px;
-  img {
-    width: 0;
+  .main-nav{
+    height: 60px;
+    a{
+      display: inline-block;
+      margin: 0 30px;
+      color: #fff;
+      &:hover{
+        text-decoration: underline;
+      }
+    }
   }
-}
-.aside-collapse-width {
-  width: 0 !important;
+  .item{
+    margin: 0 30px;
+    a{
+      margin: 0px;
+    }
+  }
+  // 隐藏sidebar 设置left
+  .hideSidebar footer{
+    left: 36px !important;
+  }
+  .logo {
+    height: 60px;
+    overflow: hidden;
+    line-height: 60px;
+    border-color: rgba(238, 241, 146, 0.3);
+    border-right-width: 1px;
+    border-right-style: solid;
+    img {
+      display: inline-block;
+      height: 50px;
+      padding: 5px;
+      margin: 0 auto;
+    }
+    .logo-text {
+      font-size: 16px;
+      display: inline-block;
+      color: #fff;
+    }
+  }
+  .main-container{
+    // padding: 0 10px;
+  }
+  .content-info {
+    text-align: right;
+    .user-info{
+      padding-right: 35px;
+      text-align: right;
+    }
+    .userinfo-inner {
+      cursor: pointer;
+      color: #fff;
+      line-height: 60px;
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 20px;
+        margin: 10px 0px 10px 10px;
+        float: right;
+      }
+    }
+  }
   .app-el-menu {
-    width: 0;
+    width: 200px;
   }
-}
-.aside-collapse-width.aside-show {
-  width: 65px !important;
-  .app-el-menu {
-    width: 65px;
+  .hamburger {
+    padding: 0 18px;
+    font-size: 24px;
+    height: 60px;
+    line-height: 60px;
+    color: white;
+    cursor: pointer;
+    &.active{
+      color: #409EFF;
+    }
   }
-}
-.app-main {
-  overflow-y: scroll;
-  background-color: #f3f7fa;
-}
-.collapse-btn {
-  // min-width: 60px;
-}
-.index-li {
-  padding: 0;
-}
-.index-a {
-  display: inline-block;
-  height: 100%;
-  padding: 0 20px;
-}
+
+  .app-main {
+    overflow-y: scroll;
+    background-color: #f3f7fa;
+  }
+  .index-li {
+    padding: 0;
+  }
+  .index-a {
+    display: inline-block;
+    height: 100%;
+    padding: 0 20px;
+  }
 </style>
 <template>
-  <div class="layout">
+  <div :class="classObj" class="layout" >
     <header>
-      <el-row>
-        <el-col class="logo hidden-md-and-down" :class="{'logo-collapse-width': isCollapse}" :xs="24" :sm="24" :md="4" :lg="4">
-          <img :src="require('@/assets/images/admin/logo.png')" alt="">
-          <p class="logo-text">公司口号公司口号公司口号</p>
-        </el-col>
-
-        <el-col class="collapse-btn" :xs="2" :sm="2" :md="2" :lg="2">
-          <div class="tools" @click.prevent="collapse">
-            <i class="el-icon-tickets"></i>
-          </div>
-        </el-col>
-
-        <el-col class="content-info" :xs="22" :sm="22" :md="22" :lg="18">
-          <el-row>
-            <el-col :xs="24" :sm="12" :md="16" :lg="16">
-              <el-menu class="header-menu hidden-xs-only" :default-active="headerIndex" mode="horizontal" @select="handleSelect" background-color="#3e4558" text-color="#fff" active-text-color="#ffd04b">
-                <el-menu-item :index="index + ''" v-for="(item, index) in headerList" :key="index" class="index-li">
-                  <router-link :to="item.path" class="index-a">
-                    <i :class="item.icon"></i>{{item.name}}
-                  </router-link>
-                </el-menu-item>
-              </el-menu>
-            </el-col>
-            <el-col class="user-info" :xs="24" :sm="12" :md="8" :lg="8">
-              <el-dropdown trigger="click">
+      <div class="header-wrap">
+        <el-row>
+          <!-- logo -->
+          <el-col class="logo hidden-md-and-down"  :xs="24" :sm="24" :md="4" :lg="4">
+            <router-link to="/dashboard">
+              <img :src="require('@/assets/images/admin/logo.png')" alt="">
+              <p class="logo-text">公司口号公司口号公司口号</p>
+            </router-link>
+          </el-col>
+          <!-- 控制sidebar -->
+          <el-col class="collapse-btn" :xs="2" :sm="2" :md="2" :lg="2">
+            <div class="hamburger" :class="{'active': sidebar.opened}" @click="toggleClick" >
+              <i class="el-icon-tickets"></i>
+            </div>
+          </el-col>
+          <!-- 主导航 -->
+          <el-col class="content-info" :xs="22" :sm="22" :md="22" :lg="18">
+            <!-- topbar 中的导航 -->
+            <!-- <el-row>
+              <el-col :xs="24" :sm="12" :md="16" :lg="16">
+                <el-menu class="header-menu hidden-xs-only" :default-active="headerIndex" mode="horizontal" @select="handleSelect" background-color="#3e4558" text-color="#fff" active-text-color="#ffd04b">
+                  <el-menu-item :index="index + ''" v-for="(item, index) in headerList" :key="index" class="index-li">
+                    <router-link :to="item.path" class="index-a">
+                      <i :class="item.icon"></i>{{item.name}}
+                    </router-link>
+                  </el-menu-item>
+                </el-menu>
+              </el-col>
+              <el-col class="user-info" :xs="24" :sm="12" :md="8" :lg="8">
+                <el-dropdown trigger="click">
+                  <span class="el-dropdown-link userinfo-inner"><img :src="userPhoto"/>{{userName}}</span>
+                  <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item>我的消息</el-dropdown-item>
+                    <el-dropdown-item>设置</el-dropdown-item>
+                    <el-dropdown-item divided @click.native="loginout">退出登录</el-dropdown-item>
+                  </el-dropdown-menu>
+                </el-dropdown>
+              </el-col>
+            </el-row> -->
+            <nav  class="main-nav">
+              <span class="hidden-sm-and-down">
+                <el-badge :value="200" :max="99" class="item">
+                  <a href="">系统消息</a>
+                  <!-- <el-button size="small">评论</el-button> -->
+                </el-badge>
+                <a href="">新手引导</a>
+                <a href="">
+                  <i class="iconfont icon-message_fill"></i>
+                  商户管理员<span></span>
+                </a>
+                <a href="">余额 <span class="text-pink">55.00</span> 元</a>
+                <a href="">修改密码</a>
+                <a href="javascript:void(0);" @click.prevent="loginout">
+                  <i class="iconfont icon-message_fill"></i>
+                  退出
+                </a>
+              </span>
+              <el-dropdown trigger="click" class="user-info">
                 <span class="el-dropdown-link userinfo-inner"><img :src="userPhoto"/>{{userName}}</span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>我的消息</el-dropdown-item>
@@ -147,10 +184,10 @@
                   <el-dropdown-item divided @click.native="loginout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
-            </el-col>
-          </el-row>
-        </el-col>
-      </el-row>
+            </nav>
+          </el-col>
+        </el-row>
+      </div>
     </header>
     <sidebar class="sidebar-container"/>
     <div class="main-container">
@@ -158,42 +195,9 @@
       <!-- <tags-view/> -->
       <app-main/>
     </div>
-    <!-- <div class="layout-aside">
-      <aside :class="{'aside-collapse-width': isCollapse, 'aside-show': isSubMenu}">
-        <el-row class="aside">
-          <el-col>
-            <el-menu
-              :default-active="slideIndex"
-              @select="handleSelect2"
-              @open="handleOpen"
-              @close="handleClose"
-              :collapse="isCollapse"
-              class="app-el-menu"
-              background-color="#3e4558"
-              text-color="#fff"
-              active-text-color="#ffd04b"
-              :default-openeds="defaultOpends"
-              :collapse-transition="false"
-            >
-              <el-submenu :index="index + ''" v-for="(item, index) in slideList.slideMenu" :key="index">
-                <template slot="title">
-                  <i class="el-icon-star-on"></i>
-                  <span>{{item.name}}</span>
-                </template>
-                <router-link :to="inItem.path" v-for="(inItem, inIndex) in item.childNode" :key="inIndex">
-                  <el-menu-item :index="index + '-'+ inIndex">{{inItem.name}}</el-menu-item>
-                </router-link>
-              </el-submenu>
-            </el-menu>
-          </el-col>
-        </el-row>
-      </aside>
-      <section class="app-main">
-        <transition name="fade" mode="out-in">
-          <router-view></router-view>
-        </transition>
-      </section>
-    </div> -->
+    <footer>
+      <p>@copyright</p>
+    </footer>
   </div>
 </template>
 
@@ -255,6 +259,17 @@ export default {
         }
       ]
       return arr
+    },
+    sidebar () {
+      return this.$store.state.app.sidebar
+    },
+    classObj () {
+      return {
+        hideSidebar: !this.sidebar.opened,
+        openSidebar: this.sidebar.opened,
+        withoutAnimation: this.sidebar.withoutAnimation,
+        mobile: this.device === 'mobile'
+      }
     }
   },
   methods: {
@@ -334,9 +349,8 @@ export default {
       })
     },
     // 折叠导航栏
-    collapse () {
-      this.collapsed = !this.collapsed
-      this.isCollapse = !this.isCollapse
+    toggleClick () {
+      this.$store.dispatch('toggleSideBar')
     }
   },
   watch: {

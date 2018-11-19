@@ -23,7 +23,6 @@ router.beforeEach((to, from, next) => {
       store.dispatch('GenerateRoutes', { roles }).then(() => { // 根据roles权限生成可访问的路由表
         console.log(store.getters.addRouters, 'addRouters')
         router.addRoutes(store.getters.addRouters)
-        debugger
         next({ ...to, replace: true })
         // router.addRoutes(store.getters.addRouters) // 动态添加可访问路由表
         // next({ ...to, replace: true }) // hack方法 确保addRoutes已完成 ,set the replace: true so the navigation will not leave a history record

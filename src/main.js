@@ -17,7 +17,7 @@ import store from './store/index'
 
 // 全局样式
 import '@/assets/style/index.scss'
-// 引入全局css
+// reset css
 import './assets/style/reset.css'
 // 引入iconfont的css
 import './assets/iconfont/iconfont.css'

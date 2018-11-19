@@ -44,7 +44,7 @@ export const constantRouterMap = [
         path: 'dashboard',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
-        meta: { title: 'dashboard', icon: 'iconfont icon-message_fill', noCache: true }
+        meta: { title: '首页', icon: 'iconfont icon-message_fill', noCache: true }
       }
     ]
   }
@@ -69,7 +69,7 @@ export const asyncRouterMap = [
     redirect: '/permission/index',
     alwaysShow: true, // will always show the root menu
     meta: {
-      title: 'permission',
+      title: '权限设置页面',
       icon: 'iconfont icon-message_fill',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
@@ -79,7 +79,7 @@ export const asyncRouterMap = [
         component: () => import('@/views/permission/page'),
         name: 'PagePermission',
         meta: {
-          title: 'pagePermission',
+          title: '页面权限设置',
           roles: ['admin'] // or you can only set roles in sub nav
         }
       },
@@ -88,7 +88,7 @@ export const asyncRouterMap = [
         component: () => import('@/views/permission/directive'),
         name: 'DirectivePermission',
         meta: {
-          title: 'directivePermission'
+          title: '指令权限设置'
           // if do not set roles, means: this page does not require permission
         }
       }
