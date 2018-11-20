@@ -72,13 +72,12 @@
   .content-info {
     text-align: right;
     .user-info{
+      display: inline-block;
+      line-height: 60px;
       padding-right: 35px;
       text-align: right;
-    }
-    .userinfo-inner {
       cursor: pointer;
       color: #fff;
-      line-height: 60px;
       img {
         width: 40px;
         height: 40px;
@@ -87,6 +86,17 @@
         float: right;
       }
     }
+    // .userinfo-inner {
+    //   color: #fff;
+    //   line-height: 60px;
+    //   img {
+    //     width: 40px;
+    //     height: 40px;
+    //     border-radius: 20px;
+    //     margin: 10px 0px 10px 10px;
+    //     float: right;
+    //   }
+    // }
   }
   .app-el-menu {
     width: 200px;
@@ -165,10 +175,10 @@
                   <!-- <el-button size="small">评论</el-button> -->
                 </el-badge>
                 <a href="">新手引导</a>
-                <a href="">
+                <!-- <a href="">
                   <i class="iconfont icon-message_fill"></i>
                   商户管理员<span></span>
-                </a>
+                </a> -->
                 <a href="">余额 <span class="text-pink">55.00</span> 元</a>
                 <a href="">修改密码</a>
                 <a href="javascript:void(0);" @click.prevent="loginout">
@@ -176,14 +186,15 @@
                   退出
                 </a>
               </span>
-              <el-dropdown trigger="click" class="user-info">
+              <router-link class="user-info" to="/account/index"><img :src="userPhoto"/>{{userName}}</router-link>
+              <!-- <el-dropdown trigger="click" class="user-info">
                 <span class="el-dropdown-link userinfo-inner"><img :src="userPhoto"/>{{userName}}</span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>我的消息</el-dropdown-item>
                   <el-dropdown-item>设置</el-dropdown-item>
                   <el-dropdown-item divided @click.native="loginout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
-              </el-dropdown>
+              </el-dropdown> -->
             </nav>
           </el-col>
         </el-row>
@@ -193,6 +204,9 @@
     <div class="main-container">
       <!-- <navbar/> -->
       <!-- <tags-view/> -->
+      <!-- <transition name="fade-transform" mode="out-in"> -->
+      <breadcrumb class="breadcrumb-container" style="margin: 20px 20px 0;"/>
+      <!-- </transition> -->
       <app-main/>
     </div>
     <footer>
@@ -203,10 +217,11 @@
 
 <script>
 // import { storage } from '@/utils/common'
-import axios from 'axios'
+// import axios from 'axios'
 // import { Navbar, Sidebar, AppMain, TagsView } from './components'
 import { Sidebar, AppMain, TagsView } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
+import Breadcrumb from '@/components/Breadcrumb'
 
 export default {
   name: 'Layout',
@@ -214,7 +229,8 @@ export default {
     // Navbar,
     Sidebar,
     AppMain,
-    TagsView
+    TagsView,
+    Breadcrumb
   },
   mixins: [ResizeMixin],
   data () {
@@ -227,7 +243,7 @@ export default {
       slideList: [],
       menuInfo: [],
       slideInfo: [],
-      userName: '智能工具智能工具智能工具',
+      userName: '商户管理员: 刘先生',
       userPhoto: require('@/assets/images/admin/timg.jpg'),
       companyPhoto: require('@/assets/images/admin/timg.jpg'),
       collapsed: false,
@@ -287,65 +303,20 @@ export default {
       //   console.log(res)
       // })
     },
-    setIndex (path) {
-      let routePath = path.split('?')[0]
-      let firstPath = routePath.match(/^\/\w*/gi)[0]
-      if (routePath === '/') {
-        this.headerIndex = '0'
-        this.slideList = this.menus[0]
-      } else {
-        this.menus.forEach((item, index) => {
-          if (item.path === firstPath) {
-            this.headerIndex = index + ''
-            this.slideList = this.menus[index]
-          }
-        })
-        this.menus[this.headerIndex].slideMenu.forEach((item, index) => {
-          item.childNode.forEach((item2, index2) => {
-            if (routePath.indexOf(item2.path) !== -1 && item.path !== '/') {
-              this.slideIndex = item2.index
-            }
-          })
-        })
-      }
-      if (this.slideList.slideMenu && this.slideList.slideMenu.length) {
-        this.isSubMenu = true
-      } else {
-        this.isSubMenu = false
-      }
-      // storage.setSession('index', this.headerIndex)
-      // storage.setSession('slide_index', this.slideIndex)
-    },
-    getMenus () {
-      const self = this
-      axios.get('/static/user.json').then(function (data) {
-        // 处理返回回来的数据为其子菜单添加索引
-        data.data.forEach((item, index) => {
-          item.index = index + ''
-          if (item.slideMenu && item.slideMenu.length) {
-            item.slideMenu.forEach((item2, index2) => {
-              item2.childNode.forEach((item3, index3) => {
-                item3.index = index2 + '-' + index3
-              })
-            })
-          }
-        })
-        self.menus = data.data
-      }).catch(function (error) {
-        console.log(error)
-      })
-    },
-    handleSelect (key, keyPath) {
-      this.slideIndex = '0-0'
-    },
-    handleSelect2 (key, keyPath) {},
-    handleOpen (key, keyPath) {},
-    handleClose (key, keyPath) {},
     loginout () {
-      this.$confirm('确认退出吗?', '提示', {}).then(() => {
+      this.$confirm('确认退出吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+        // type: 'warning'
+      }).then(() => {
         // storage.removeSession('index')
         // storage.removeSession('slide_index')
-        location.href = './index.html'
+        this.$router.replace('login')
+      }).catch(() => {
+        // this.$message({
+        //   type: 'info',
+        //   message: '已取消删除'
+        // })
       })
     },
     // 折叠导航栏
@@ -354,12 +325,11 @@ export default {
     }
   },
   watch: {
-    '$route.path' (newval) {
-      this.setIndex(newval)
-    }
+    // '$route.path' (newval) {
+    //   this.setIndex(newval)
+    // }
   },
   mounted () {
-    this.getMenus()
     this.initLogin()
   }
 }

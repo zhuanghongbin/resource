@@ -24,8 +24,8 @@ export default {
 
 <style scoped>
 .app-main {
-  /* 100px = header + footer = 60 + 40 */
-  min-height: calc(100vh - 100px);
+  /* 170px = header + footer = 60 + 40 + 70（breadcrumb的高度）*/
+  min-height: calc(100vh - 170px);
   width: 100%;
   background:#fff;
   position: relative;

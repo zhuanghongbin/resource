@@ -1,6 +1,5 @@
 <template>
   <div class="app-container">
-    <breadcrumb class="breadcrumb-container"/>
     <!-- <switch-roles @change="handleRolesChange" />
     <div :key="key" style="margin-top:30px;">
       <span v-permission="['admin']" class="permission-alert">
@@ -33,13 +32,9 @@
 </template>
 
 <script>
-import Breadcrumb from '@/components/Breadcrumb'
 
 export default{
-  name: 'DirectivePermission',
-  components: {
-    Breadcrumb
-  }
+  name: 'DirectivePermission'
 }
 </script>
 

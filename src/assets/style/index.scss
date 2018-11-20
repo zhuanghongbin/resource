@@ -128,7 +128,7 @@ code {
 
 //main-container全局样式
 .app-container {
-  padding: 20px;
+  padding: 0 20px 20px;
 }
 
 .components-container {
@@ -209,4 +209,11 @@ code {
 }
 .text-panGreen{
   color: $textPanGreen;
+}
+
+// 
+.el-col{
+  .line{
+    text-align: center;
+  }
 }

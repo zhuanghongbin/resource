@@ -1,6 +1,10 @@
 <template>
   <div class="login-container">
+
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="top">
+      <router-link to='/login' class="logo">
+        <img src="/static/images/xdd-logo-samll.png" alt="">
+      </router-link>
       <div class="title-container">
         <h3 class="title">欢迎登录商户管理系统</h3>
       </div>
@@ -33,7 +37,13 @@
           <i class="iconfont icon-message_fill"></i>
         </span>
       </el-form-item>
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登 录</el-button>
+      <div class="login-btn">
+        <el-button :loading="loading" type="primary" style="width:100%; height:40px;" @click.native.prevent="handleLogin">登 录</el-button>
+      </div>
+      <div class="login-other">
+        <router-link to="/forget" class="forget">忘记密码</router-link>
+        <router-link to="/regist" class="regist">注册账号</router-link>
+      </div>
     </el-form>
   </div>
 </template>
@@ -46,7 +56,7 @@ export default {
   data () {
     return {
       loginForm: {
-        username: 'admin',
+        username: '13900000000',
         password: '1111111'
       },
       loginRules: {
@@ -108,7 +118,7 @@ export default {
   .login-container {
     .el-input {
       display: inline-block;
-      height: 47px;
+      height: 40px;
       width: 85%;
       input {
         background: #fff;
@@ -117,7 +127,7 @@ export default {
         border-radius: 0px;
         padding: 12px 5px 12px 15px;
         color: #a8a8a8;
-        height: 47px;
+        height: 40px;
         // caret-color: $cursor;
         // &:-webkit-autofill {
         //   -webkit-box-shadow: 0 0 0px 1000px $bg inset !important;
@@ -148,13 +158,20 @@ $light_gray:#eee;
   background-color: $bg;
   .login-form {
     position: absolute;
-    left: 0;
-    right: 0;
+    right: 200px;
     width: 385px;
     max-width: 100%;
     padding: 70px 40px 50px 40px;
     margin: 160px auto 0;
     background-color: #f9fbfa;
+  }
+  .logo{
+    position: absolute;
+    top: -50px;
+    left: 0px;
+    img{
+       width: 80px;
+    }
   }
   .iconfont-container {
     padding: 6px 5px 6px 15px;
@@ -180,6 +197,25 @@ $light_gray:#eee;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+  .login-btn{
+    margin: 30px 0 5px;
+  }
+  .login-other{
+    display: flex;
+    justify-content: space-between;
+    .forget{
+      color: #606266;
+      &:hover{
+        color: #409EFF;
+      }
+    }
+    .regist{
+      color: #606266;
+      &:hover{
+        color: #409EFF;
+      }
+    }
   }
 }
 </style>

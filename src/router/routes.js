@@ -26,6 +26,16 @@ export const constantRouterMap = [
     hidden: true
   },
   {
+    path: '/forget',
+    component: () => import('@/views/forget/Index'),
+    hidden: true
+  },
+  {
+    path: '/regist',
+    component: () => import('@/views/regist/Index'),
+    hidden: true
+  },
+  {
     path: '/auth-redirect',
     component: () => import('@/views/login/Authredirect'),
     hidden: true
@@ -63,6 +73,22 @@ export const constantRouterMap = [
 ]
 
 export const asyncRouterMap = [
+  {
+    path: '/account',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/account/Index'),
+        name: 'Account',
+        meta: {
+          title: '账号管理',
+          icon: 'iconfont icon-message_fill',
+          roles: ['admin', 'editor']
+        }
+      }
+    ]
+  },
   {
     path: '/permission',
     component: Layout,
