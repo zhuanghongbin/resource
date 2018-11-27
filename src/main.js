@@ -28,6 +28,17 @@ import 'element-ui/lib/theme-chalk/display.css'
 
 // 全局引入ElementUI
 import ElementUI from 'element-ui'
+
+// 引入百度 echart ：https://github.com/ecomfe/vue-echarts/blob/master/README.zh_CN.md
+import ECharts from 'vue-echarts/components/ECharts.vue'
+
+// 手动引入 ECharts 各模块来减小打包体积
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/tooltip'
+
+// 注册ECharts组件后即可使用
+Vue.component('v-chart', ECharts)
+
 // 全局挂载 ElementUI
 Vue.use(ElementUI, {size: 'small', zIndex: 3000})
 
